@@ -1,0 +1,88 @@
+<div class="row">
+    <!--end col-->
+
+       <div class="col-lg-12">
+           <div class="card">
+               <div class="card-body">
+                <div class="float-right align-item-center mt-2">
+                </div>
+                <span type="button" routerLink='/list' class="mdi mdi-arrow-left-thick" style="color:crimson;font-size:40px;"></span>
+                <h4 class="mt-0 header-title" style="margin:55px 0;color: rgb(227, 45, 45);text-align: center;">Planification maintnance</h4> 
+               </div>
+
+         <div class="container">
+                  <div class="container custom-container-2">
+
+                     
+                    <div class="col-md-12">
+                
+                <form   [formGroup]="form"   (ngSubmit)="save()">
+                    <label  for="ligne" >Ligne : </label>
+        
+                    <select  (change)="loadEquipement($event)"  class="form-control" formControlName="ligne" id="ligne"  >
+                        <option disabled value="">Séléctionner l'atelier </option>
+                        <option *ngFor="let ligne_item of Ligne" [value]="ligne_item.id">{{ligne_item.nom_ligne}} </option>
+                    </select>
+                    <!-- <div *ngIf="f.description.touched && f.description.invalid" class="text-danger">
+                        <div *ngIf="f.description.errors.required"><i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Description est obligatoire</div>
+                         </div>     -->
+
+
+
+
+
+                  <label for="equipement">Équipement :<small class="text-danger font-15">*</small></label>
+                  <select class="form-control" formControlName="equipement" id="equipement" >
+                    <option disabled value="">Sélect Equipement</option>
+                    <option *ngFor="let equi_item of Equipement" [value]="equi_item.id">
+                        {{equi_item.libelle}} <strong>Réference:</strong> {{equi_item.numero_serie}}
+                    </option>
+                </select>  
+                <div *ngIf="f.equipement.touched && f.equipement.invalid" class="text-danger">
+                    <div *ngIf="f.equipement.errors.required"><i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Equipement est obligatoire</div>
+
+                </div> 
+                
+                
+
+                  <label for="tache">Tâche :<small class="text-danger font-15">*</small></label>
+                  <input type="text" id="tache" formControlName="tache" name="tache" placeholder="Nom de la tâche..." class="form-control mb-3">
+
+                  <div *ngIf="f.tache.touched && f.tache.invalid" class="text-danger">
+                    <div *ngIf="f.tache.errors.required"><i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Tache est obligatoire</div>
+                     </div> 
+
+
+
+                  
+                  <label for="intervalles">Intervalles :<small class="text-danger font-15">*</small></label>
+                  <select id="interval"  formControlName="interval" name="interval" class="form-control mb-3">
+                    <option value="hebdomadaire">Hebdomadaire</option>
+                    <option value="mensuel">Mensuel</option>
+                    <option value="trimestriel">Trimestriel</option>
+                    <option value="semestriel">Semestriel</option>
+                    <option value="annuel">Annuel</option>
+                  </select>
+                  <div *ngIf="f.interval.touched && f.interval.invalid" class="text-danger">
+                    <div *ngIf="f.interval.errors.required"><i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Intervalles est obligatoire</div>
+                     </div> 
+
+
+
+                  <label for="description">Description :<small class="text-danger font-15">*</small></label>
+                  <textarea id="description" formControlName="description" name="description"  placeholder="Description de la tâche..." class="form-control mb-3"></textarea>
+                  <div *ngIf="f.description.touched && f.description.invalid" class="text-danger">
+                    <div *ngIf="f.description.errors.required"><i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Description est obligatoire</div>
+                     </div>   
+
+
+
+                  <button type="submit" class="btn btn-info btn-round ">Enregistrer</button>
+                </form>
+
+            </div>
+          </div>
+         </div>
+      </div>
+</div>
+</div>

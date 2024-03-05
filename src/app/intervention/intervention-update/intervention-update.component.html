@@ -1,0 +1,294 @@
+<div class="row">
+    <!--end col-->
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="card-body ">
+                    <br>
+                    <h4 class="mt-0 header-title" style="margin:55px 0;color: rgb(210, 30, 30);text-align: center;">
+                         MODIFIER LE RAPPORT </h4>
+
+
+                    <div class="alert alert-outline-danger alert-danger-shadow mb-0 alert-dismissible fade show"
+                        role="alert">
+                        <ul>
+                            <li> <strong>Début prévu :{{intervention.ordreintervention.debutprevu | date:'MM-dd-yyyy-HH:mm'}} </strong> </li>
+                        </ul>
+                        <ul>
+                            <li> <strong>Fin prévu :{{intervention.ordreintervention.finprevu | date:'MM-dd-yyyy-HH:mm'}} </strong> </li>
+                        </ul>
+                        <ul>
+                            <li><strong> Période de fin de réparation :{{intervention.ordreintervention.dateestimation
+                                    }} </strong> </li>
+                        </ul>
+                    </div>
+
+
+
+
+                </div>
+                <br>
+                <div class="card-body">
+
+                    <form class="mb-0" [formGroup]="form"  (ngSubmit)="submitForm()" novalidate>
+                 
+                        <div class="row">
+                            <div class="col-md-6">
+
+
+                                <div class="form-group">
+                                    <label class="text">Debut réel<small class="text-danger font-13">*</small></label>
+                                    <input  [attr.disabled]="true" [(ngModel)]="intervention.date_debut" type="datetime-local" class="form-control" formControlName="date_debut">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+                               
+                                    <div  class="form-group row">
+                                        <label for="" class="text">Essais effectués<small
+                                                class="text-danger font-13">*</small></label>
+
+                                        
+
+                                       
+                             <div class="row" [ngClass]="{isdisabled: !isWaiting}">
+
+                                <div class="col-md-5" style="margin-top:11%">
+
+                                    <div class="radio radio-info form-check-inline">
+                                        <input  type="radio"  id="encours" value="en cours" name="etat"
+                                         [(ngModel)]="etat" [ngModelOptions]="{standalone: true}"  (change)="changeEat($event)"  >
+                                        <label  class="custom-control-label" for="en cours" class="text" >EN COURS</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4" style="margin-top:11%">
+
+                                    <div class="radio radio-info form-check-inline">
+                                        <input  type="radio"  id="terminer" value="terminer" name="etat"
+                                        [(ngModel)]="etat"  [ngModelOptions]="{standalone: true}"   (change)="changeEat($event)">
+                                        <label class="custom-control-label"
+                                            for="terminer" class="text">TERMINER</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3" style="margin-top:11%">
+                                    <div class="radio radio-info form-check-inline">
+                                        <input  type="radio" id="arreter" value="arreter" name="etat"
+                                        [(ngModel)]="etat"  [ngModelOptions]="{standalone: true}"  (change)="changeEat($event)"  >
+                                        <label  class="custom-control-label" for="arreter" class="text" >ARRETER</label>
+                                    </div>
+                                </div>  
+                                    </div>
+                             
+
+                            </div>
+                        </div>
+                     </div>
+                        <div class="row">
+
+                            <!-- <div class="col-md-12"> -->
+
+
+ 
+                            <!-- </div> -->
+                        </div>
+
+                        <div class="row">
+                            <!-- <button   type="button" class="btn-sm btn-warning btn-round"     style="margin:5px"  routerLink="/modifierlistepiece/{{intervention.id}}" >Modifier liste de piéce demande</button> -->
+
+                        <div class="col-md-12">
+                                    <label class="text w-100"> 
+                                        <span> </span>
+                                        
+                                        
+
+                                        <span 
+                                        *ngIf="intervention.etat !== 'en attente des pieces'" (click)="triggerModal(modalData1,intervention.id)"
+                                            style="float: right;cursor: pointer;" class=" text-danger font-13 ml-2 ">
+                                            Manque des piéces nécessaires ?
+                                        </span>
+                                        <span
+                                        *ngIf="intervention.etat=='en attente des pieces'"
+                                         routerLink="/modifierlistepiece/{{intervention.id}}"
+                                        style="float: right;cursor: pointer; color:goldenrod;" class=" font-13 ml-2 ">
+                                        Modifier liste de piéce demande ?
+                                    </span>
+                                        
+                                    </label>
+
+
+                                
+                              
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text">Observation <small class="text-danger font-13">*</small></label>
+                                <textarea type="text" class="form-control" id="observation"   placeholder="ecrire ici"  [(ngModel)]="intervention.observation" formControlName="observation"></textarea>
+                                <div *ngIf="f.observation.touched && f.observation.invalid "
+                                    class="text-danger">
+                                    <div *ngIf="f.observation.errors.required"> <i
+                                            class="fa fa-exclamation-triangle" style="padding: 5px;"
+                                            aria-hidden="true"></i>observation  est obligatoire.</div>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div formArrayName="tachesx" class="form-group">
+                                    <div *ngFor="let tache of description()?.controls; let i = index">
+                                        <div     formGroupName="{{i}}">
+                                            <table class="table table-bordered"  >
+                                                <tr>
+                                                    <th> <label class="text text-center">Date  </label></th>
+                                                    <th><label class="text text-center">tache  {{i+1}} </label> </th>
+                                                    <th class="thp"><label class="text text-center">Piéce utilisée</label></th>
+                                                    <th class="thq"><label class="text text-center">Quantité</label></th>
+                                                    <th><label class="text text-center">Action </label></th>
+                                                </tr>
+                                                <tr>
+
+                                                    <td> <input [min]="minDate"  type="datetime-local" class="form-control" id="date" formControlName="date"></td>
+                                                    <td><textarea type="text" class="form-control "   formControlName="tache" ></textarea></td>
+                                                    <td class="thp">
+                                                     <input   type="text" class="form-control inp"   formControlName="nom_piece">
+
+                                                        <select formControlName="nom_piece" class="form-control" type="text">
+                                                          <option hidden  value="">Choisir piéce ici ...</option>
+                                                          <option  *ngFor="let nom_piece of dropdownList" >{{ nom_piece.item_text }}</option>
+                                                        </select>
+                                                      </td>
+                                                      
+                                                    <td class="thq"><input type="number" class="form-control" formControlName="quantite" ></td>
+
+                                                    <td>
+                                                        <button (click)="removeTache(i)" class="btn btn-sm btn-danger"
+                                                            style="margin:5px"><i class="fas fa-trash-alt"></i></button>
+                                                        <button (click)="addTache($event)"
+                                                            class="btn btn-sm btn-success" style="margin:5px"><i
+                                                                class="fa fa-plus" aria-hidden="true"></i> </button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                     
+
+                            <div class="float align-item-center mt-2">
+                                <button
+                                    class="btn btn-danger btn-round  waves-effect waves-light px-4 align-self-center report-btn"
+                                    type="submit" routerLink='/list-intervention'>Annuler</button>
+                            </div>
+                            <div class="float align-item-center mt-2">
+                                <button
+                                    class="btn btn-info btn-round  waves-effect waves-light px-4 align-self-center report-btn"
+                                    type="submit"> Modifier le rapport </button>
+                            </div>
+                        </div>
+                  
+                  
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<ng-template #modalData1 let-modal>
+    <div class="modal-header">
+        <h3 class="modal-title">  Pièces nécessaires </h3>
+    </div>
+ 
+    <div class="modal-body">
+        <form [formGroup]="form2" (ngSubmit)="submit()">
+            <div formArrayName="liste">
+                <div class="row mb-3" *ngFor="let qte of liste().controls; let i = index" [formGroupName]="i">
+
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-md-4">
+
+
+                                <label for="liste" style="color: black;">Piéce : <small
+                                        class="text-danger font-13">*</small></label>
+                                <select formControlName="piece" type="text" class="form-control">
+                                    <option hidden selected value="0">Choisir ici ...</option>
+                                    <option *ngFor="let x of dropdownList" [value]="x.item_id">{{x.item_text}}</option>
+                                </select>
+                                <!-- </div> -->
+
+                            </div>
+
+                            <div class="col-md-4">
+
+
+                                <label for="liste" style="color: black;">Quantité <small
+                                        class="text-danger font-13">*</small></label>
+                                <input formControlName="quantite" type="text" class="form-control">
+
+                            </div>
+
+                            <div class="col-md-4 text-center">
+
+                                <label for="liste" style="color: black;margin-top:2.5rem;"> </label>
+
+
+                                <button (click)="removeQuantite(i)" class="btn btn-sm btn-danger" style="margin:5px"><i
+                                        class="fas fa-trash-alt"></i></button>
+                                <button (click)="addQuantite($event)" class="btn btn-sm btn-success"
+                                    style="margin:5px"><i class="fa fa-plus" aria-hidden="true"></i> </button>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <input type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.close('Save click')"
+            value="Annuler">
+        <input type="button" class="btn btn-danger" value="Valider et fermer" (click)="Updatestatus()">
+    </div>
+</ng-template>

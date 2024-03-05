@@ -1,0 +1,243 @@
+
+<div class="row">
+    <!--end col-->
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="card overflow-hidden">
+                    <div class="card-body ">
+
+                       
+                        <div class="card-body invoice-head"> 
+                            <div class="row">
+                                <div class="col-md-4 align-self-center">                                                
+                                    <img src="assets/R.png" alt="logo-small" class="logo-sm mr-2" height="38">                                            
+                                    <!-- <img src="assets/images/log.png" alt="logo-large" class="logo-lg" height="18">                                                -->
+                                </div>
+                                <div class="card-body invoice-head"> 
+                                    <div class="row">
+                                        <div class="col-md-4 align-self-center">                                                
+                                            <img src="assets/R.png" alt="logo-small" class="logo-sm mr-2" height="38">                                            
+                                            <!-- <img src="assets/images/log.png" alt="logo-large" class="logo-lg" height="18">                                                -->
+                                        </div>
+                                        <div class="col-md-8">
+                               
+                                            <ul class="list-inline mb-0 contact-detail float-right">                                                   
+                                                <li class="list-inline-item">
+                                                    <div class="pl-3">
+                                                        <i class="mdi mdi-web"></i>
+                                                        <p class="text-muted mb-0">www.GMAO-SEEM.com</p>
+                                                    </div>                                                
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <div class="pl-3">
+                                                        <i class="mdi mdi-phone"></i>
+                                                        <p class="text-muted mb-0">(216) - 71 384 920/77 240 390</p>
+                                                    </div>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <div class="pl-3">
+                                                        <i class="mdi mdi-map-marker"></i>
+                                                        <p class="text-muted mb-0">Chebika - KAIROUAN</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div> 
+                        </div><!--end card-body-->
+                        <div class="card-body ">
+                            <br>
+                           
+                                
+                        <h4 class="header-title mt-0 mb-2" style="margin:55px 0;color: rgb(210, 30, 30);text-align: center;">Fiche de demande d'intervention</h4>
+                     
+                    </div>
+                    <br>
+                    <div class="card-body">
+
+                        <form class="mb-0" [formGroup]="form" (ngSubmit)="submitForm()">
+                            <div class="row">
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label  class="text"  style="color: black;"  >Date demande <small class="text-danger font-13">*</small></label>
+                                        <input  [min]="minDate"  type="datetime-local" class="form-control" id="date"
+                                            formControlName="date">
+                                        <div *ngIf="f.date.touched && f.date.invalid " class="text-danger">
+                                            <div *ngIf="f.date.errors.required"> <i class="fa fa-exclamation-triangle"
+                                                    style="padding: 5px;" aria-hidden="true"></i>date est obligatoire.
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label  class="text"  style="color: black;" >Date arrêt de machine <small class="text-danger font-13">*</small></label>
+                                        <input type="datetime-local" class="form-control" id="dureearretmachine"
+                                            formControlName="dureearretmachine">
+                                        <div *ngIf="f.dureearretmachine.touched && f.dureearretmachine.invalid "
+                                            class="text-danger">
+                                            <div *ngIf="f.dureearretmachine.errors.required"> <i
+                                                    class="fa fa-exclamation-triangle" style="padding: 5px;"
+                                                    aria-hidden="true"></i>Date arrêt de machine est obligatoire.</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                
+                               
+                            </div>
+
+                            <div class="row">
+          
+                               
+
+
+                                <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label  for="ligne" style="color: black;"  >Ligne<small class="text-danger font-13">*</small> </label>
+        
+                                        <select (change)="loadEquipement($event)" class="form-control" formControlName="ligne" id="ligne" >
+                                            <option disabled value="">Séléctionner l'atelier </option>
+                                            <option *ngFor="let ligne_item of Ligne" [value]="ligne_item.id">
+                                                {{ligne_item.nom_ligne}} </option>
+                                        </select>
+                                        <div *ngIf="f.ligne.touched && f.ligne.invalid" class="text-danger">
+                                            <div *ngIf="f.ligne.errors.required"> <i
+                                                    class="fa fa-exclamation-triangle" style="padding: 5px;"
+                                                    aria-hidden="true"></i>ligne est obligatoire</div>
+        
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="equipement" style="color: black;"  >Equipement <small class="text-danger font-13">*</small></label>
+
+                                             <select class="form-control" formControlName="equipement" id="equipement" (change)="selectLigne($event)">
+                                                <option disabled value="">Sélect Equipement</option>
+                                                <option *ngFor="let equi_item of Equipement" [value]="equi_item.id">
+                                                    {{equi_item.libelle}} <strong>Réference:</strong> {{equi_item.numero_serie}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="f.equipement.touched && f.equipement.invalid" class="text-danger">
+                                                <div *ngIf="f.equipement.errors.required"><i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>equipement est obligatoire</div>
+
+                                            </div>
+                                       
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            
+                            <div class="row">
+                             
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="text"  style="color: black;" >Priorité <small class="text-danger font-13">*</small></label>
+
+                                             <select class="form-control" formControlName="priorite" id="priorite" (change)="changePriorite($event)">
+                                                <option disabled value="">Sélect ordre</option>
+                                                <option *ngFor="let priorite_item of Priorite"  [ngValue]="priorite_item">
+                                                    {{priorite_item}}
+                                                </option>
+                                            </select>
+                                                <div *ngIf="f.priorite.touched && f.priorite.invalid" class="text-danger">
+                                                <div *ngIf="f.priorite.errors.required"><i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>priorite est obligatoire</div>
+
+                                            </div>
+                                     
+                                    </div>
+                                </div> 
+
+
+                                <div   *ngIf="Userrole=='admin'" class="col-md-6"  >
+                                    <div class="form-group">
+                                        <label  class="text" style="color: black;"  >Nom du demandeur <small class="text-danger font-13">*</small></label>
+
+                                     
+                                            <select class="form-control" formControlName="employee" id="employee" >
+                                                <option disabled value="">Séléctionner votre nom</option>
+                                                <option *ngFor="let employe_item of Employee" [ngValue]="employe_item.id">
+                                                    {{employe_item.nom}} {{employe_item.prenom}}</option>
+                                            </select>
+                                            <div *ngIf="f.employee.touched && f.employee.invalid" class="text-danger">
+                                                <div *ngIf="f.employee.errors.required"> <i
+                                                        class="fa fa-exclamation-triangle" style="padding: 5px;"
+                                                        aria-hidden="true"></i>employee est obligatoire</div>
+
+                                            </div>
+                                      
+                                    </div>
+                                </div>
+
+                               
+
+                            </div>
+
+
+                                     
+
+                                    <div class="form-group">
+                                        <label  class="text"  style="color: black;" >Natures de pannes<small class="text-danger font-13">*</small></label>
+
+                                    <div *ngFor="let dat of data; let i=index"  >
+                                        <label>
+                                          <input type="checkbox"  [checked]="dat.check"  [value]="dat.value" (change)="onCheckboxChange($event)"  />
+                                          {{dat.name}}
+                                        </label>
+                                      </div>
+                                      <div *ngIf="f.panne.touched && f.panne.invalid" class="text-danger">
+                                        <div *ngIf="f.panne.errors.required"><i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>panne est obligatoire</div>
+
+                                    </div>
+                                      </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label  class="text"  style="color: black;" >Demande /Description de probléme rencontré <small
+                                                    class="text-danger font-13">*</small></label>
+                                            <textarea type="textarea" class="form-control" id="description"
+                                                formControlName="description"  placeholder="Ecrire ici une description de l'intervention"></textarea>
+                                            <div *ngIf="f.description.touched && f.description.invalid" class="text-danger">
+                                                <div *ngIf="f.description.errors.required"> <i
+                                                        class="fa fa-exclamation-triangle" style="padding: 5px;"
+                                                        aria-hidden="true"></i>description est obligatoire.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                  <div class="float-right align-item-center mt-2">
+                                    <button class="btn btn-danger btn-round  waves-effect waves-light px-4 align-self-center report-btn" type="submit" routerLink="/demandeNontraiter">Annuler</button>
+                                  </div>
+
+                                <div class="float-right align-item-center mt-2">
+                                <button class="btn btn-info btn-round  waves-effect waves-light px-4 align-self-center report-btn" type="submit" >Modifier la demande</button>
+                              </div>
+                      
+
+                             
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

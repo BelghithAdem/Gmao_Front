@@ -1,0 +1,85 @@
+<div class="row">
+    <!--end col-->
+
+       <div class="col-lg-12">
+        
+           <div class="card">
+               <div class="card-body">
+                <section class="msger">
+                    <header class="msger-header mb-3" style="background-color: #efefef;">
+                      <div class="msger-header-title">
+                        <div
+                         class="msg-img"
+                         style="background-image: url(assets/images/equipe.jpg)">
+                         <i class="mdi mdi-record text-success"></i></div><div>Equipe maintenance </div>
+                      </div>
+                      <div class="msger-header-options">
+                        <span><i class="fas fa-cog"></i></span>
+                      </div>
+                    </header>
+                  
+                    <main class="msger-chat" #chatWindow>
+                      <div class="msg left-msg"  *ngFor=" let msj of message" [class.msg2]="msj.id_user==id_user">
+                        <div >
+                        <div *ngIf="msj.role=='admin'" class="msg-img"   [hidden]="msj.id_user==id_user" style="background-image: url(assets/images/userN.png)"></div>
+                        <div *ngIf="msj.role=='technicien'" class="msg-img"  [hidden]="msj.id_user==id_user" style="background-image: url(assets/images/tt.png)"></div>
+                        <div *ngIf="msj.role=='employee'" class="msg-img"  [hidden]="msj.id_user==id_user" style="background-image: url(assets/images/emp.png)" ></div>
+                        <div class="msg-info-time"><button *ngIf="msj.id_user==id_user" class="btn2 msg2" type="button" (click)="delete(msj.id)"><span class="mdi mdi-close"></span></button></div>
+
+                        <div class="msg-bubble" [class.msg-bubble2]="msj.id_user==id_user">
+
+                          <div class="msg-info">
+                            
+                            <div class="msg-info-name"  [hidden]="msj.id_user==id_user">{{msj.user}}</div>
+                          </div>
+                             
+                          <div class="msg-text">
+                            {{msj.text}}
+                            <!-- <img   *ngIf="msj.image" src ="http://127.0.0.1:1337/images/{{msj.image}}" width="400px" alt="image" > -->
+                             </div>
+                        </div>
+                       <span class="ml-3">{{ msj.createdAt | date:'dd/MM/yyyy HH:mm' }}<span class="mdi mdi-check"></span></span>
+
+
+                      </div>
+
+                    </div>
+                      <!-- <div class="msg msg2"  *ngFor=" let msj of message">
+                        <div *ngIf="msj.role=='admin'" >
+                        <div
+                         class="msg-img"
+                         style="background-image: url(assets/images/userN.png)"
+                        ></div>
+                  
+                        <div class="msg-bubble">
+                          <div class="msg-info">
+                            <div class="msg-info-name">{{msj.user}}</div>
+                            <div class="msg-info-time"></div>
+                          </div>
+                  
+                          <div class="msg-text">
+                            {{msj.text}}
+                            <img  *ngIf="msj.image" src ="http://127.0.0.1:1337/images/{{msj.image}}" width="400px" alt="image" >
+                          </div>
+                        </div>
+                        {{ msj.createdAt | date:'dd/MM/yyyy HH:mm' }}<span class="mdi mdi-check"></span>
+
+
+                      </div>
+                    </div> -->
+                    
+                    </main>
+                  
+                    <form class="msger-inputarea"  #f="ngForm" (ngSubmit)="send()" >
+                      <input type="text" class="msger-input" placeholder="Enter your message..." [(ngModel)]="msj" [ngModelOptions]="{ standalone: true }">
+                      <label class="custom-file-upload mt-1"> 
+                        <input type="file" name="myFile" (change)="selectimg($event)"> <span class="mdi mdi-plus-box-multiple" ></span>
+                    </label>
+                      <button type="submit" class="msger-send-btn "  >Envoyer <span class="mdi mdi-send"></span>
+                      </button>
+                    </form>
+                  </section>           
+                 </div>
+</div>
+</div>
+</div>

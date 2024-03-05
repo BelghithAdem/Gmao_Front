@@ -1,0 +1,58 @@
+.img{
+  height: 90px;
+  width: 90px;
+}
+.float-right{padding: 20px;}
+
+
+.custom-file-upload {
+  width: 200px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+  height: 30px;
+  padding: 0.375rem 0.75rem;
+}
+
+.custom-file-upload:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+.custom-checkbox {
+  margin-top: 10px;
+}
+
+.custom-checkbox label {
+  display: inline-block;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.custom-checkbox .text-danger {
+  margin-top: 5px;
+}
+
+.custom-checkbox .text-danger i {
+  padding: 5px;
+}
+
+.custom-checkbox img {
+  display: block;
+  margin-top: 10px;
+  max-width: 100%;
+}

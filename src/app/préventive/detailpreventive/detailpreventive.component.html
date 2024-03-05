@@ -1,0 +1,60 @@
+<div class="row">
+    <!--end col-->
+
+       <div class="col-lg-12">
+           <div class="card">
+            <div class="card-body">
+                <div class="float-right align-item-center mt-2">
+                </div>
+                <span type="button" routerLink='/list' class="mdi mdi-arrow-left-thick" style="color:crimson;font-size:40px;"></span>
+               </div>
+               <div class="card-body"> 
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img   src ="http://127.0.0.1:1337/images/{{preventive[0].equipement.image}}"  alt="" class=" mx-auto  d-block"  width ="400" height="400">
+                            <div class="row">
+                                <div class="col-sm-4">
+    
+                                </div>
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                        </div><!--end col-->
+    
+                    <div class="col-lg-6 align-self-center">
+                        <div class="single-pro-detail">
+                            <h3 class="mb-1  font-25">Détail</h3>
+                            <div class="custom-border"></div>
+                            <h3 class="pro-title"></h3>
+                            <p class="text-muted mb-2"></p> 
+                            <h6 class="pro-price"> <span><del></del></span><small class="text-danger font-weight-bold ml-2"></small></h6> 
+                            <ul class="list-inline mb-2 product-review">
+                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                                <li class="list-inline-item"><i class="mdi mdi-star-half text-warning"></i></li>
+                                
+                            </ul>
+                            <ul class="list-unstyled pro-features border-0">
+                                <li  class=" font-20 mb-2" ><span style="color: rgb(12, 15, 113);">Date de creation:</span> <span style="color: rgb(9, 10, 10);">   {{preventive[0].createdAt| date:'dd/MM/yyyy HH:mm'}}</span> </li>
+
+                                <li  class=" text font-20 mb-2" ><span style="color: rgb(12, 15, 113);">Intervalle:</span> <span style="color: rgb(9, 10, 10);">  {{preventive[0].interval}}</span> </li>
+
+                                <li  class=" font-20 mb-2" ><span style="color:  rgb(12, 15, 113);">tache: </span>  <span style="color:  rgb(9, 10, 10);">   {{preventive[0].tache}}</span>  </li>
+
+                                <li  class=" font-20 mb-2" ><span style="color:  rgb(12, 15, 113);">Description:</span> <span style="color:  rgb(9, 10, 10);">   {{preventive[0].description}}</span> </li>
+
+                                <li  class=" font-20 mb-2" ><span style="color: rgb(12, 15, 113);">Information sur equipement:</span> <span style="color: rgb(9, 10, 10);"> Nom de l'équipement est "{{preventive[0].equipement.libelle}}" votre marque est"{{preventive[0].equipement.marque}}"", Numéro de série "{{preventive[0].equipement.numero_serie}}" Durée de service "{{preventive[0].equipement.duree_en_service}}"Jour </span> </li>
+
+                            </ul>
+                             
+                         
+                           
+                                                                   
+                        </div>
+               
+                </div>
+            </div>
+</div>
+</div>

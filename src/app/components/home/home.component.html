@@ -1,0 +1,123 @@
+ 
+        <div class="row ">
+         <!--end col-->
+            <div class="col-lg-12">
+                <div class="card ">
+                    <div class="card-body">
+                        
+                        <div class="container justify-content-center "> 
+                            
+                            <div class="row">
+
+
+                                <div class="container">
+                                    <div class="row">
+                                       
+
+                                        <div class="col-md-4 col-xl-4">
+                                            <div class="card bg-c-pink order-card">
+                                                <div class="card-block">
+                                                    <h6 class="m-b-20">ORDRE D'INTERVENTION</h6>
+                                                    <h2 class="text-right"> <i class="mdi mdi-format-list-bulleted f-left "></i><span>{{nbIn}}</span></h2>
+                                                    <p class="m-b-0"><span class="f-right"></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-xl-4">
+                                            <div class="card bg-c-green order-card">
+                                                <div class="card-block">
+                                                    <h6 class="m-b-20">DEMANDE INTERVENTION</h6>
+                                                    <h2 class="text-right"><i class="mdi mdi-comment-multiple f-left "></i><span>{{nbDe}}</span></h2>
+                                                    <p class="m-b-0"><span class="f-right"></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-xl-4">
+                                            <div class="card bg-c-yellow order-card">
+                                                <div class="card-block">
+                                                    <h6 class="m-b-20">DEMANDE TRAITER </h6>
+                                                    <h2 class="text-right"> <i class="mdi mdi-briefcase-check f-left"></i><span>{{ DemandeTraiter}}</span></h2>
+                                                    <p class="m-b-0"><span class="f-right"></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+               
+                            </div>
+                            <div class="row" class=" mt-3">  
+                                          
+                                </div>
+                            <div class="row">  
+                                <div class="custom-control text-center">
+                                    
+                                    <label class="border-0 text-center"><i class="mdi mdi-circle " style="color: yellow;"></i>En cours </label>
+                                    <label class="border-0 text-center ml-3" ><i class="mdi mdi-circle mr-1 " style="color:green;"></i> Terminer </label>
+
+                                </div>                               
+                                <div class="col-md-12">
+                                    <div class="text-center" *ngIf="Userrole =='admin'" id='calendar'> <span style="background-color: rgb(61, 61, 219); color:rgb(246, 246, 246)"> Calendrier Intervention</span> </div>
+                                    <div  class="text-center" *ngIf="Userrole=='technicien' " id='calendar2'><span style="background-color: rgb(61, 61, 219); color:rgb(246, 246, 246)"> Calendrier Ordre Intervention </span>  </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+
+                            <div  class="row mt-5">
+                                <div class="col-md-12">
+                                    <div class="chart-wrapper">
+                                        <canvas baseChart 
+                                          [datasets]="barChartData"
+                                          [labels]="barChartLabels"
+                                          [options]="barChartOptions"
+                                          [plugins]="barChartPlugins"
+                                          [legend]="barChartLegend"
+                                          [chartType]="barChartType">
+                                        </canvas>
+                                      </div>
+                                      
+                                </div>
+
+                                <div class="col-md-12 mt-5">
+
+                                    <div class="chart-wrapper">
+                                        <canvas baseChart
+                                                [data]="pieChartData"
+                                                [labels]="pieChartLabels"
+                                                [chartType]="pieChartType"
+                                                [options]="pieChartOptions"
+                                                [colors]="pieChartColors"
+                                                [legend]="pieChartLegend"
+                                                [plugins]="pieChartPlugins">
+                                        </canvas>
+                                      </div>
+                                      
+
+
+                                </div>
+                               
+                                
+                            </div>
+            </div>
+
+
+
+
+
+
+
+
+           
+        </div>
+    </div> 
+</div>  
+</div>
+       
+
+           
+   
+    

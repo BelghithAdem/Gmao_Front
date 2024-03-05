@@ -1,0 +1,100 @@
+
+<body>
+
+    <!-- partial:index.partial.html -->
+    <div class="box-form">
+        <div class="left">
+            <div class="overlay">
+
+            </div>
+        </div>
+        
+              
+            <div class="right">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" action="" >
+
+                
+                <img class="img2" src="assets/R.png"   style=" border-radius:10%;">
+                <div class="inputs inp">
+                <input   type="email"  id="email" formControlName="email" placeholder="Entrez votre adresse e-mail " [ngClass]=" {'is-valid': submitted && loginFormControl.email.isvalid }"><br>
+                <span class="text-danger" class="invalid-feedback"
+                *ngIf="(loginFormControl.email.touched || submitted) && loginFormControl.email.errors?.required"  class="border-danger">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                Email est obligatoire
+            </span>
+            <span  class="text-danger"
+                              *ngIf="loginFormControl.email.touched && loginFormControl.email.errors?.email" class="border-danger">
+                              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                              Entrez une adresse valide   
+                          </span>
+                
+                <input type="password" formControlName="password" id="password" placeholder="Entrez votre mot de passe">
+                <span  class="text-danger"
+                          *ngIf="(loginFormControl.password.touched || submitted) && loginFormControl.password.errors?.required"  class="border-danger">
+                          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                          Password est obligatoire
+                      </span>
+                      <span   class="text-danger"
+                      *ngIf="loginFormControl.password.touched && loginFormControl.password.errors?.minlength"  class="border-danger">
+                      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                      Votre mot de passe est courte 
+                  </span> 
+                  <div class="form-group row mt-4">
+                          
+                    <div class="col-sm-12 text-right">
+                        <a data-toggle="modal"  data-target="#exampleModalCenter" class="text-muted font-13"><i class="mdi mdi-lock"></i> Mot de passe oublié?</a>                                    
+                    </div>
+                </div>
+                    <!--alert danger login-->
+                    
+               
+            </div>
+                
+                
+                
+       
+                
+                
+                <button class="bt1"  type="submit">Se connecter<i class="fas fa-sign-in-alt ml-1"></i></button>
+                <div class="form-group mt-2 mb-2">                         
+                    <div class="alert icon-custom-alert alert-outline-pink b-round fade show pa-5 mb-0" role="alert" *ngIf="error==1">
+                        <i class="mdi mdi-alert-outline alert-icon "></i>
+                            <div class="alert-text">
+                                <strong> Coordonnées Invalid ! </strong>  
+                            </div>
+                        </div>
+                      </div>
+            </form>
+            </div>
+             
+    </div>
+    <!-- partial -->
+   
+      
+     
+     
+</body>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form #f="ngForm" (ngSubmit)="envoyer()">
+
+        <div class="modal-header model1">
+          <h5 class="modal-title" id="exampleModalLongTitle">Récupération de mot de passe</h5>
+        </div>
+        <div class="modal-body model1">
+            <label for="inputEmail4"> </label>
+
+      <input type="email" class="form-control mb-2 "  placeholder="Entrer email de votre compte" name="email" #email="ngModel" [(ngModel)]="objemail.email" required>
+      <div class="text  text-danger" *ngIf="email.touched && email.hasError('email')">Entré un email correct"foulen@gmail.com"</div>
+
+        </div>
+        <div class="modal-footer model1">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer </button>
+          <button type="submit" class="btn btn-primary" >Récupérer</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>

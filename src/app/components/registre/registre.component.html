@@ -1,0 +1,126 @@
+<!-- Log In page -->
+<div class="row">
+    <div class="col-lg-6 pr-0">
+      <div class="card mb-0 shadow-none">
+        <div class="card-body">
+          <div class="px-3">
+            <div class="media">
+              <a href="http://localhost:4200/registre" class="logo logo-admin">
+                <img src="assets/OIP2.jpg" height="100" alt="logo" class="my-3">
+              </a>
+              <div class="media-body ml-3 align-self-center">
+                <h1 class="mt-0 mb-1 ml-2" style="color: rgb(57, 83, 216);">S’inscrire</h1>
+              </div>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="submit()">
+              <div class="form-group">
+                <label for="nom" style="color: black;">Nom</label>
+                <input formControlName="nom" id="nom" type="text" class="form-control">
+                <div *ngIf="f.nom.touched && f.nom.invalid" class="text-danger">
+                  <div *ngIf="f.nom.errors.required">
+                    <i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Nom est obligatoire.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="prenom" style="color: black;">Prénom</label>
+                <input formControlName="prenom" id="prenom" type="text" class="form-control">
+                <div *ngIf="f.prenom.touched && f.prenom.invalid" class="text-danger">
+                  <div *ngIf="f.prenom.errors.required">
+                    <i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Prenom est obligatoire.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email" style="color: black;">Email</label>
+                <input formControlName="email" id="email" type="email" class="form-control">
+                <div *ngIf="f.email.touched && f.email.invalid" class="text-danger">
+                  <div *ngIf="f.email.errors.required">
+                    <i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Email est obligatoire.
+                  </div>
+                  <div *ngIf="f.email.errors.email">
+                    <i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Le email doit être une adresse valide
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" style="color: black;">Mot de passe</label>
+                <div class="input-group">
+                  <input *ngIf="!passwordVisible" type="password" formControlName="password" class="form-control" id="password">
+                  <input *ngIf="passwordVisible" type="text" formControlName="password" class="form-control" id="password">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                      <i class="mdi" [ngClass]="passwordVisible ? 'mdi-eye-off' : 'mdi-eye'"></i>
+                    </button>
+                  </div>
+                </div>
+                <div *ngIf="f.password.touched && f.password.invalid" class="text-danger">
+                  <div *ngIf="f.password.errors.required">
+                    <i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Mot de passe est obligatoire.
+                  </div>
+                </div>
+                <div class="text-danger" *ngIf="f.password.touched && f.password.errors?.minlength">
+                  <i class="border-danger" style="padding: 5px;" aria-hidden="true" class="fa fa-exclamation-triangle"
+                    aria-hidden="true"></i> Votre mot de passe est court.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirmer le mot de passe:</label>
+                <div class="input-group">
+                  <input *ngIf="!passwordVisible1" type="password" formControlName="confirmPassword" class="form-control"
+                    id="confirmPassword" [ngClass]="{'is-invalid': isConfirmPasswordInvalid()}">
+                  <input *ngIf="passwordVisible1" type="text" formControlName="confirmPassword" class="form-control"
+                    id="confirmPassword" [ngClass]="{'is-invalid': isConfirmPasswordInvalid()}">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="togglecPasswordVisibility()">
+                      <i class="mdi" [ngClass]="passwordVisible1 ? 'mdi-eye-off' : 'mdi-eye'"></i>
+                    </button>
+                  </div>
+                </div>
+                <div *ngIf="isConfirmPasswordInvalid()" class="invalid-feedback">
+                  Les mots de passe ne correspondent pas.
+                </div>
+                <div *ngIf="!isConfirmPasswordInvalid()" class="valid-feedback">
+                  Les mots de passe correspondent.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="tel" style="color: black;">Télephone</label>
+                <input formControlName="tel" id="tel" type="tel" class="form-control">
+                <div *ngIf="f.tel.touched && f.tel.invalid" class="text-danger">
+                  <div *ngIf="f.tel.errors.required">
+                    <i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>téléphone est
+                    obligatoire.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="adresse" style="color: black;">Adresse</label>
+                <input formControlName="adresse" id="adresse" type="adresse" class="form-control">
+                <div *ngIf="f.adresse.touched && f.adresse.invalid" class="text-danger">
+                  <div *ngIf="f.adresse.errors.required">
+                    <i class="fa fa-exclamation-triangle" style="padding: 5px;" aria-hidden="true"></i>Adresse est
+                    obligatoire.
+                  </div>
+                </div>
+              </div>
+              <div class="align-center mt-2 mb-2">
+                <button class="btn btn-info btn-round bt1" type="submit" [disabled]="!form.valid">S’inscrire</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 p-0 d-flex justify-content-center">
+      <div class="accountbg d-flex align-items-center">
+        <div class="account-title text-white text-center">
+          <img src="assets/R.png" alt="">
+          <div class="border w-25 mx-auto border-primary"></div>
+          <p class="font-14 mt-3">Vous avez déjà un compte ? <a href="" class="text-primary">Se connecter</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Log In page -->
+  
